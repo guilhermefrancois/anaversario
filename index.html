@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Menu do Dia — Chef em Casa</title>
+<title>Uma surpresa ✨</title>
+<meta name="description" content="Abre à meia-noite do dia 29.">
+<meta property="og:title" content="Uma surpresa ✨">
+<meta property="og:description" content="Abre à meia-noite do dia 29.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A8%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Manrope:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
@@ -75,19 +79,33 @@ html.lk body{background:#24090e}
 #lock p{color:#c4b2a8;margin:0 0 36px}
 .cd{display:flex;gap:clamp(14px,4vw,34px);justify-content:center}
 .cd div{min-width:64px}.cd b{display:block;font:italic 300 clamp(48px,12vw,96px)/1 var(--d);color:var(--gold)}.cd small{font:600 11px var(--b);letter-spacing:.2em;text-transform:uppercase;color:#c4b2a8}
+#fin,#cl,#cr,#sp{display:none}
+html.fn #lock .cd,html.fn #lock p,html.fn #lock .ded,html.fn #lock .orn{display:none}
+html.fn #fin{display:block;font:italic 300 clamp(130px,36vw,340px)/1 var(--d);font-feature-settings:"tnum";color:var(--gold);animation:drop 1s cubic-bezier(.3,.6,.4,1) forwards}
+html.fn.ms #fin{animation-name:dropms}
+html.fn.ms.sus #fin{animation:sus 1.4s ease-in-out infinite}
+@keyframes sus{0%,100%{transform:translateY(30%) scale(1);opacity:.45}50%{transform:translateY(30%) scale(1.07);opacity:1;text-shadow:0 0 50px #d3b27a}}
+#fin small{font-size:.38em;opacity:.85}
+.cu{position:fixed;top:0;bottom:0;width:50.2%;background:linear-gradient(#24090e,#3a0f17);z-index:100;transition:transform 1.8s cubic-bezier(.7,0,.2,1)}
+#cl{left:0;box-shadow:inset -2px 0 0 #d3b27a}#cr{right:0;box-shadow:inset 2px 0 0 #d3b27a}
+html.ro #cl,html.ro #cr{display:block}
+html.ro.op #cl{transform:translateX(-101%)}html.ro.op #cr{transform:translateX(101%)}
+#sp{position:fixed;inset:0;width:100%;height:100%;z-index:120;pointer-events:none}html.ro #sp{display:block}
+@keyframes drop{0%{transform:translateY(-70%);opacity:0}30%{opacity:1}100%{transform:translateY(35%);opacity:0}}
+@keyframes dropms{0%{transform:translateY(-30%);opacity:0}15%{opacity:1}100%{transform:translateY(30%);opacity:.35}}
 @keyframes up{to{transform:none}}
 @keyframes fade{to{opacity:1}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pulse{50%{transform:scale(1.35);opacity:.7}}
 @keyframes m{to{transform:translateX(-50%)}}
 @media(max-width:860px){nav{display:none}.g{grid-template-columns:1fr}.side{position:static}.badge{opacity:.18;right:-40px}.big{font-size:76px}.menu li:hover{padding-left:0}}
-@media(prefers-reduced-motion:reduce){.rv,.hero h1 span b,.hero p,.hero .tag,.btn{opacity:1;transform:none;animation:none;transition:none}.mq div,.badge,.dot{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv,.hero h1 span b,.hero p,.hero .tag,.btn{opacity:1;transform:none;animation:none;transition:none}.mq div,.badge{animation:none}html.fn #fin,html.fn.ms.sus #fin{animation:none}}
 </style>
-<script>if(Date.now()<new Date('2026-11-29T00:00:00-03:00').getTime())document.documentElement.classList.add('lk')</script>
+<script>if(location.hash==='#teste'||Date.now()<new Date('2026-11-29T00:00:00-03:00').getTime())document.documentElement.classList.add('lk');if(!document.documentElement.classList.contains('lk'))document.title='Menu do Dia · Guilherme François'</script>
 </head>
 <body>
 <div id="bar"></div>
-<div id="lock"><div><div class="orn"><i></i></div><div class="ded">Para Ana Clara</div><p>Algo especial está sendo preparado.<br>Abre à meia-noite do dia 29.</p><div id="cd" class="cd"></div></div></div>
+<div id="lock"><div><div class="orn"><i></i></div><div class="ded">Para Ana Clara</div><p>Algo especial está sendo preparado.<br>Abre à meia-noite do dia 29.</p><div id="cd" class="cd"></div><div id="fin"></div></div></div>
+<div id="cl" class="cu"></div><div id="cr" class="cu"></div><canvas id="sp" aria-hidden="true"></canvas>
 <header id="hd"><div class="w">
 <a href="#topo" class="logo">Chef em Casa<i>.</i></a>
 <nav><a href="#cafe">Café da manhã</a><a href="#almoco">Almoço</a><a href="#jantar">Jantar</a></nav>
@@ -151,11 +169,17 @@ s();addEventListener('scroll',s,{passive:true});
 document.querySelectorAll('.menu').forEach(function(u){u.querySelectorAll('.rv').forEach(function(e,i){e.style.transitionDelay=(i*90)+'ms'})});
 var r=document.querySelectorAll('.rv');
 if('IntersectionObserver' in window){var o=new IntersectionObserver(function(a){a.forEach(function(x){if(x.isIntersecting){x.target.classList.add('on');o.unobserve(x.target)}})},{threshold:.12});r.forEach(function(e){o.observe(e)})}else{r.forEach(function(e){e.classList.add('on')})}
-var T=new Date('2026-11-29T00:00:00-03:00').getTime(),cd=document.getElementById('cd'),root=document.documentElement;
+var tm=location.hash==='#teste',T=tm?0:new Date('2026-11-29T00:00:00-03:00').getTime(),last=-1,ac=null,lth=-1,sus=0,cd=document.getElementById('cd'),root=document.documentElement;
 function p(n){return n<10?'0'+n:n}
-function tk(){var d=T-Date.now();if(d<=0){root.classList.remove('lk');window.scrollTo(0,0);return}
-var s=Math.floor(d/1000);cd.innerHTML=[[Math.floor(s/86400),'dias'],[Math.floor(s%86400/3600),'horas'],[Math.floor(s%3600/60),'min'],[s%60,'seg']].map(function(x){return '<div><b>'+p(x[0])+'</b><small>'+x[1]+'</small></div>'}).join('');setTimeout(tk,1000)}
-if(root.classList.contains('lk'))tk();
+function snd(f,t,g){if(!ac||ac.state!=='running')return;var o=ac.createOscillator(),n=ac.createGain();o.type='triangle';o.frequency.value=f;n.gain.setValueAtTime(g,ac.currentTime);n.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+t);o.connect(n);n.connect(ac.destination);o.start();o.stop(ac.currentTime+t)}
+function go(){document.title='Menu do Dia · Guilherme François';snd(880,1,.16);setTimeout(function(){snd(1320,1.4,.12)},200);root.classList.remove('lk','fn','ms','sus');scrollTo(0,0);if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;root.classList.add('ro');requestAnimationFrame(function(){requestAnimationFrame(function(){root.classList.add('op');burst()})});setTimeout(function(){root.classList.remove('ro','op')},2200)}
+function burst(){var c=document.getElementById('sp'),x=c.getContext('2d'),w=c.width=innerWidth,h=c.height=innerHeight,P=[],i,a,v;for(i=0;i<160;i++){a=Math.random()*6.283;v=2+Math.random()*7;P.push({x:w/2,y:h/2,vx:Math.cos(a)*v,vy:Math.sin(a)*v-2,l:1,s:1+Math.random()*2.5})}(function f(){x.clearRect(0,0,w,h);var n=0;P.forEach(function(p){if(p.l<=0)return;n++;p.x+=p.vx;p.y+=p.vy;p.vy+=.08;p.vx*=.99;p.l-=.012;x.globalAlpha=Math.max(p.l,0);x.fillStyle=p.l>.5?'#f3d9a0':'#d3b27a';x.beginPath();x.arc(p.x,p.y,p.s,0,6.283);x.fill()});if(n)requestAnimationFrame(f);else x.clearRect(0,0,w,h)})()}
+function tk(){var d=T-Date.now();if(d<=0){if(!sus){sus=1;root.classList.add('fn','ms','sus');document.getElementById('fin').innerHTML='0<small>,0</small>';setTimeout(function(){snd(110,.4,.35)},500);setTimeout(function(){snd(110,.4,.3)},850);setTimeout(go,2600)}return}
+var s=Math.ceil(d/1000),f=document.getElementById('fin');if(d<=10000){root.classList.add('fn');root.classList.toggle('ms',d<=5000);if(s!==last){f.style.animation='none';void f.offsetWidth;f.style.animation='';if(d>5000)snd(s%2?1300:1000,.05,.14)}f.innerHTML=d<=5000?(Math.floor(d/100)/10).toFixed(1).replace('.','<small>,')+'</small>':s;if(d<=5000){var th=Math.floor(d/100);if(th!==lth){lth=th;snd(th%2?1800:1400,.04,.14)}}last=s}else if(s!==last){last=s;cd.innerHTML=[[Math.floor(s/86400),'dias'],[Math.floor(s%86400/3600),'horas'],[Math.floor(s%3600/60),'min'],[s%60,'seg']].map(function(x){return '<div><b>'+p(x[0])+'</b><small>'+x[1]+'</small></div>'}).join('')}setTimeout(tk,d<=5200?16:200)}
+function au(){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();if(ac.state!=='running')ac.resume()}catch(e){}}
+['pointerdown','touchstart','keydown','click'].forEach(function(n){addEventListener(n,au,{passive:true})});
+if(tm){var st=function(){if(T)return;T=Date.now()+10000;last=-1;lth=-1;sus=0;tk()};['pointerdown','keydown'].forEach(function(n){addEventListener(n,st)})}
+if(root.classList.contains('lk')&&!tm)tk();
 })();
 </script>
 </body>
